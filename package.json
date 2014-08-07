@@ -1,7 +1,7 @@
 {
   "name": "timeously",
   "description": "Timeous interval creation for precise predefined periods",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "contributors": [
     {
       "name": "Ashley Brener",
@@ -17,14 +17,15 @@
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-coffee": "^0.10.1"
   },
-  "bugs": {
-    "url": "https://github.com/frisb/timeously/issues"
-  },
-  "license": "MIT",
+  "homepage": "http://timeous.ly",
   "repository": {
     "type": "git",
     "url": "https://github.com/frisb/timeously"
   },
+  "bugs": {
+    "url": "https://github.com/frisb/timeously/issues"
+  },
+  "license": "MIT",
   "keywords": [
     "timeously",
     "timer",
