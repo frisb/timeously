@@ -14,8 +14,7 @@ module.exports = (grunt) ->
           join: true
         files:
           'lib/timeously.js': 'src/**/*.coffee'
-
-  grunt.loadTasks('tasks')
+          
   grunt.loadNpmTasks('grunt-contrib-clean')
   grunt.loadNpmTasks('grunt-contrib-coffee')
   grunt.registerTask('default', ['clean', 'coffee'])

@@ -1,83 +1,89 @@
-monthNames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
-dayNames = ['mon', 'tues', 'wed', 'thurs', 'fri', 'sat', 'sun']
+((factory) ->
+  if (typeof(define) is 'function' && define.amd)
+    define ->
+      factory()
+      return
+  else if (typeof(module) isnt 'undefined' && typeof(module.exports) isnt 'undefined')
+    module.exports = factory()
 
-_INTERVAL_TYPE =
-  MINUTELY: 'minute'
-  HOURLY: 'hour'
-  DAILY: 'day'
-  WEEKLY: 'dayOfWeek'
-  MONTHLY: 'month'
+  return)(->
+    monthNames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+    dayNames = ['mon', 'tues', 'wed', 'thurs', 'fri', 'sat', 'sun']
 
-class Timeously
-  constructor: (options, @callback) ->
-    @name = if options.name then ' ' + options.name else ''
-    @interval = options.interval || 1
-    @intervalType = options.type || _INTERVAL_TYPE.MINUTELY
-    @modulus = options.start
+    _INTERVAL_TYPE =
+      MINUTELY: 'minute'
+      HOURLY: 'hour'
+      DAILY: 'day'
+      WEEKLY: 'dayOfWeek'
+      MONTHLY: 'month'
 
-    @timerID = null
-    @initID = null
-    @start()
+    class Timeously
+      constructor: (options, @callback) ->
+        @name = if options.name then ' ' + options.name else ''
+        @interval = options.interval || 1
+        @intervalType = options.type || _INTERVAL_TYPE.MINUTELY
+        @modulus = options.start
 
-  start: ->
-    eta = 60 - new Date().getSeconds()
+        @timerID = null
+        @initID = null
+        @start()
 
-    callback = =>
-      now = new EventDate()
+      start: ->
+        eta = 60 - new Date().getSeconds()
 
-      if (@nextEvent[@intervalType] is now[@intervalType])
-        @callback()
-        @readyNextEvent()
+        callback = =>
+          now = new EventDate()
 
-    init = =>
-      # set a minutely interval
-      @timerID = setInterval(callback, 60000)
-      @readyNextEvent()
+          if (@nextEvent[@intervalType] is now[@intervalType])
+            @callback()
+            @readyNextEvent()
 
-      console.log("Timeously firing #{@title}#{@name} from #{@nextEvent.toString()}")
+        init = =>
+          # set a minutely interval
+          @timerID = setInterval(callback, 60000)
+          @readyNextEvent()
 
-      callback()
+          console.log("Timeously firing #{@title}#{@name} from #{@nextEvent.toString()}")
 
-    @initID = setTimeout(init, eta * 1000)
-    console.log("Timeously starting #{@title}#{@name} in T - #{eta}sec and counting")
+          callback()
 
-  stop: ->
-    if (@initID isnt null)
-      clearTimeout(@initID)
-      @initID = null
+        @initID = setTimeout(init, eta * 1000)
+        console.log("Timeously starting #{@title}#{@name} in T - #{eta}sec and counting")
 
-    if (@timerID isnt null)
-      clearTimeout(@timerID)
-      @timerID = null
+      stop: ->
+        if (@initID isnt null)
+          clearTimeout(@initID)
+          @initID = null
 
-  readyNextEvent: ->
-    @lastEvent = new EventDate()
-    @nextEvent = new EventDate()
+        if (@timerID isnt null)
+          clearTimeout(@timerID)
+          @timerID = null
 
-    lastPeriod = @lastEvent[@intervalType]
+      readyNextEvent: ->
+        @lastEvent = new EventDate()
+        @nextEvent = new EventDate()
 
-    if (@modulus)
-      for i in [0...@interval]
-        delta = i + 1
-        testPeriod = lastPeriod + delta
+        lastPeriod = @lastEvent[@intervalType]
 
-        if (testPeriod % @modulus is 0)
-          @nextEvent[@intervalType] = lastPeriod + delta
-          break
-    else
-      @nextEvent[@intervalType] = lastPeriod + @interval
+        if (@modulus)
+          for i in [0...@interval]
+            delta = i + 1
+            testPeriod = lastPeriod + delta
 
-Object.defineProperty Timeously::, 'title',
-  get: ->
-    for key, val of _INTERVAL_TYPE
-      return "#{@interval} #{key.toLowerCase()}" if val is @intervalType
+            if (testPeriod % @modulus is 0)
+              @nextEvent[@intervalType] = lastPeriod + delta
+              break
+        else
+          @nextEvent[@intervalType] = lastPeriod + @interval
 
-fn = (options, callback) ->
-  new Timeously(options, callback)
+    Object.defineProperty Timeously::, 'title',
+      get: ->
+        for key, val of _INTERVAL_TYPE
+          return "#{@interval} #{key.toLowerCase()}" if val is @intervalType
 
-fn.IntervalTypes = _INTERVAL_TYPE
+    fn = (options, callback) ->
+      new Timeously(options, callback)
 
-if (typeof(define) is 'function' && define.amd)
-  define -> fn
-else if (typeof(module) isnt 'undefined' && typeof(module.exports) isnt 'undefined')
-  module.exports = fn
+    fn.IntervalTypes = _INTERVAL_TYPE
+
+    fn)
