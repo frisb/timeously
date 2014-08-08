@@ -65,8 +65,14 @@ var t = Timeously(options, function () {
 
 ## Installation
 
+#### server
 ```
 npm install timeously
+```
+
+#### client
+``` html
+<script type="text/javascript" src="lib/timeously.js"></script>
 ```
 
 ## License
