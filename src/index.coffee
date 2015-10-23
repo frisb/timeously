@@ -1,3 +1,6 @@
+monthNames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+dayNames = ['sun', 'mon', 'tues', 'wed', 'thurs', 'fri', 'sat']
+
 ((factory) ->
   if (typeof(define) is 'function' && define.amd)
     define ->
@@ -7,9 +10,6 @@
     module.exports = factory()
 
   return)(->
-    monthNames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
-    dayNames = ['mon', 'tues', 'wed', 'thurs', 'fri', 'sat', 'sun']
-
     _INTERVAL_TYPE =
       MINUTELY: 'minute'
       HOURLY: 'hour'

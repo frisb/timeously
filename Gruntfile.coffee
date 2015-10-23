@@ -10,7 +10,7 @@ module.exports = (grunt) ->
     coffee:
       compile:
         options:
-          bare: false
+          bare: true
           join: true
         files:
           'lib/timeously.js': 'src/**/*.coffee'
