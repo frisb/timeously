@@ -1,8 +1,10 @@
-# Timeously [![Build Status](https://travis-ci.org/frisb/timeously.png)](http://travis-ci.org/frisb/timeously)
+# Timeously 
+[![Build Status](https://travis-ci.org/frisb/timeously.png)](http://travis-ci.org/frisb/timeously)
+[![Dependency Status](https://gemnasium.com/frisb/timeously.svg)](https://gemnasium.com/frisb/timeously)
+[![Code Climate](https://codeclimate.com/github/frisb/timeously/badges/gpa.svg)](https://codeclimate.com/github/frisb/timeously)
+[![npm version](https://badge.fury.io/js/timeously.svg)](http://badge.fury.io/js/timeously)
 
-[![npm status badge](https://nodei.co/npm/timeously.png?stars=true&downloads=true)](https://nodei.co/npm/timeously/)
-
-Timeously is a scheduler that fires events at precise predefined events.
+Timeously is a scheduler that fires events at precise milestone intervals.
 
 All contributions are welcome.
 

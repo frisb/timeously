@@ -1,6 +1,6 @@
 {
   "name": "timeously",
-  "description": "Timeous interval creation for precise predefined events",
+  "description": "Timeous interval creation for precise milestone events",
   "version": "0.2.0",
   "contributors": [
     {
