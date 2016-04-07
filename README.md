@@ -43,13 +43,13 @@ var Timeously = require('timeously');
 var options = {
   name: 'my event',
   type: Timeously.IntervalTypes.MINUTELY,
-  interval: 5
+  interval: 5,
   start: 5
 };
 
 var i = 0;
 
-var t = Timeously(options, function () {
+var t = new Timeously(options, function () {
   if (i === 2) {
     console.log('stopping after 10 minutes.');
     t.stop();
