@@ -2,7 +2,7 @@
 
 [![npm status badge](https://nodei.co/npm/timeously.png?stars=true&downloads=true)](https://nodei.co/npm/timeously/)
 
-Timeously is a scheduler that fires events at precise predefined intervals.
+Timeously is a scheduler that fires events at precise predefined events.
 
 All contributions are welcome.
 
