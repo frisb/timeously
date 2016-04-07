@@ -1,55 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Timeously by frisb</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
     <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+    <title>Timeously by frisb</title>
   </head>
+
   <body>
+    <header>
+      <div class="inner">
+        <h1>Timeously</h1>
+        <h2>Timeous interval creation for precise predefined periods</h2>
+        <a href="https://github.com/frisb/timeously" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
 
-      <header>
-        <h1>Timeous.ly</h1>
-        <p>Timeous interval creation for precise predefined periods</p>
-      </header>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="timeously" class="anchor" href="#timeously" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Timeously</h1>
 
-      <div id="banner">
-        <span id="logo"></span>
-        <a href="https://github.com/frisb/timeously" class="button fork"><strong>View On GitHub</strong></a>
-        <div class="downloads">
-          <span>Downloads:</span>
-          <ul>
-            <li><a href="https://github.com/frisb/timeously/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/frisb/timeously/tarball/master" class="button">TAR</a></li>
-          </ul>
-        </div>
-      </div><!-- end banner -->
-      
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
-      <section>
-        <h1>
-</h1>
+<p><a href="http://travis-ci.org/frisb/timeously"><img src="https://travis-ci.org/frisb/timeously.png" alt="Build Status"></a>
+<a href="https://gemnasium.com/frisb/timeously"><img src="https://gemnasium.com/frisb/timeously.svg" alt="Dependency Status"></a>
+<a href="https://codeclimate.com/github/frisb/timeously"><img src="https://codeclimate.com/github/frisb/timeously/badges/gpa.svg" alt="Code Climate"></a>
+<a href="http://badge.fury.io/js/timeously"><img src="https://badge.fury.io/js/timeously.svg" alt="npm version"></a></p>
 
-<p>Timeous.ly is a scheduler that fires events at precise predefined intervals.</p>
+<p>Timeously is a scheduler that fires events at precise milestone intervals.</p>
 
 <p>All contributions are welcome.</p>
 
 <h2>
-<a name="simple-api" class="anchor" href="#simple-api"><span class="octicon octicon-link"></span></a>Simple API</h2>
+<a id="simple-api" class="anchor" href="#simple-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Simple API</h2>
 
 <h4>
-<a name="timeouslyoptions-callback" class="anchor" href="#timeouslyoptions-callback"><span class="octicon octicon-link"></span></a>Timeously(options, callback)</h4>
+<a id="timeouslyoptions-callback" class="anchor" href="#timeouslyoptions-callback" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Timeously(options, callback)</h4>
 
 <ul>
 <li>
@@ -69,10 +64,12 @@
 <li>
 <code>callback</code> Function. The callback has argument <code>(response)</code>, a Dynect JSON <a href="Response.md">Response</a>
 </li>
-</ul><p>Returns a Timeously instance.</p>
+</ul>
+
+<p>Returns a Timeously instance.</p>
 
 <h4>
-<a name="timeouslyperiodtypes" class="anchor" href="#timeouslyperiodtypes"><span class="octicon octicon-link"></span></a>Timeously.PeriodTypes</h4>
+<a id="timeouslyperiodtypes" class="anchor" href="#timeouslyperiodtypes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Timeously.PeriodTypes</h4>
 
 <ul>
 <li><code>MINUTELY</code></li>
@@ -80,52 +77,61 @@
 <li><code>DAILY</code></li>
 <li><code>WEEKLY</code></li>
 <li><code>MONTHLY</code></li>
-</ul><h4>
-<a name="instancestart" class="anchor" href="#instancestart"><span class="octicon octicon-link"></span></a>instance.start()</h4>
+</ul>
+
+<h4>
+<a id="instancestart" class="anchor" href="#instancestart" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>instance.start()</h4>
 
 <p>Starts the scheduler.</p>
 
 <h4>
-<a name="instancestop" class="anchor" href="#instancestop"><span class="octicon octicon-link"></span></a>instance.stop()</h4>
+<a id="instancestop" class="anchor" href="#instancestop" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>instance.stop()</h4>
 
 <p>Stops the scheduler.</p>
 
 <h2>
-<a name="example-usage" class="anchor" href="#example-usage"><span class="octicon octicon-link"></span></a>Example Usage</h2>
+<a id="example-usage" class="anchor" href="#example-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example Usage</h2>
 
-<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">Timeously</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'timeously'</span><span class="p">);</span>
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> Timeously <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>timeously<span class="pl-pds">'</span></span>);
 
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="nx">name</span><span class="o">:</span> <span class="s1">'my event'</span><span class="p">,</span>
-  <span class="nx">type</span><span class="o">:</span> <span class="nx">Timeously</span><span class="p">.</span><span class="nx">IntervalTypes</span><span class="p">.</span><span class="nx">MINUTELY</span><span class="p">,</span>
-  <span class="nx">interval</span><span class="o">:</span> <span class="mi">5</span>
-  <span class="nx">start</span><span class="o">:</span> <span class="mi">5</span>
-<span class="p">};</span>
+<span class="pl-k">var</span> options <span class="pl-k">=</span> {
+  name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>my event<span class="pl-pds">'</span></span>,
+  type<span class="pl-k">:</span> <span class="pl-smi">Timeously</span>.<span class="pl-smi">IntervalTypes</span>.<span class="pl-c1">MINUTELY</span>,
+  interval<span class="pl-k">:</span> <span class="pl-c1">5</span>,
+  start<span class="pl-k">:</span> <span class="pl-c1">5</span>
+};
 
-<span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="pl-k">var</span> i <span class="pl-k">=</span> <span class="pl-c1">0</span>;
 
-<span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">Timeously</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'stopping after 10 minutes.'</span><span class="p">);</span>
-    <span class="nx">t</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
-  <span class="p">}</span>
-  <span class="k">else</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'this is my psuedo event'</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="pl-k">var</span> t <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Timeously</span>(options, <span class="pl-k">function</span> () {
+  <span class="pl-k">if</span> (i <span class="pl-k">===</span> <span class="pl-c1">2</span>) {
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>stopping after 10 minutes.<span class="pl-pds">'</span></span>);
+    <span class="pl-smi">t</span>.<span class="pl-c1">stop</span>();
+  }
+  <span class="pl-k">else</span> {
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>this is my psuedo event<span class="pl-pds">'</span></span>);
+  }
 
-  <span class="nx">i</span><span class="o">++</span>
-<span class="p">});</span>
-
+  i<span class="pl-k">++</span>
+});
 </pre></div>
 
 <h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<h4>
+<a id="server" class="anchor" href="#server" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>server</h4>
 
 <pre><code>npm install timeously
 </code></pre>
 
+<h4>
+<a id="client" class="anchor" href="#client" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>client</h4>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>lib/timeously.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
 
 <p>(The MIT License)</p>
 
@@ -151,14 +157,26 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 
 <p><a href="https://github.com/igrigorik/ga-beacon"><img src="https://ga-beacon.appspot.com/UA-40562957-5/timeously/readme" alt="Analytics"></a></p>
-      </section>
-      <footer>
-        <p>Project maintained by <a href="https://github.com/frisb">frisb</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
-      </footer>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/frisb/timeously/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/frisb/timeously/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/frisb/timeously"></a> is maintained by <a href="https://github.com/frisb">frisb</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-              <script type="text/javascript">
+
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
