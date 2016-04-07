@@ -37,12 +37,17 @@ module.exports = function (grunt) {
         output : {
           path     : './lib',
           filename : '<%= pkg.name %>.js',
+          library: 'Timeously',
           libraryTarget: 'umd',
           sourceMapFilename: '[file].map',
           umdNamedDefine: true
         },
 
         devtool: 'source-map',
+
+        externals: {
+          'moment-timezone': 'moment'
+        },
 
         module : {
           loaders: [
