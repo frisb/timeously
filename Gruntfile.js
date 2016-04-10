@@ -46,7 +46,7 @@ module.exports = function (grunt) {
         devtool: 'source-map',
 
         externals: {
-          'moment-timezone': 'moment'
+          'moment-timezone': 'moment-timezone'
         },
 
         module : {

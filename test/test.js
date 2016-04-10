@@ -10,12 +10,13 @@ describe('Timeously', function () {
 			name: 'my event',
 			type: Timeously.IntervalTypes.SECONDLY,
 			interval: 5,
-			start: 5
+			tz: 'Asia/Manila'
 		};
 
 		var i = 0;
 
 		var t = new Timeously(options, function () {
+			console.log(i + 1, t.now().toString());
 			if (i === 2) {
 				console.log('stopping after 10 seconds.');
 				t.stop();
@@ -29,14 +30,5 @@ describe('Timeously', function () {
 			i++
 		});
 
-
-		// db.star_0('carriers', 'gateways').then(function(carriers, gateways) {
-		// 	assert.notEqual(carriers, 'undefined');
-		// 	assert.notEqual(gateways, 'undefined');
-		// 	done();
-		// }).catch(function (err) {
-		// 	console.log(err.stack);
-		// 	done();
-		// });
 	});
 });

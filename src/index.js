@@ -3,12 +3,12 @@ import TimeBucket from './timebucket';
 
 export default class Timeously {
   constructor(options, callback) {
-    let {name, interval, type, start} = options;
+    let {name, interval, type, tz} = options;
 
     this.name = (name ? ` ${name}` : '');
     this.interval = interval || 1;
     this.intervalType = type || INTERVAL_TYPE.MINUTELY;
-    this.modulus = start;
+    this.tz = tz;
     this.callback = callback;
 
     this.timerID = null;
@@ -33,28 +33,29 @@ export default class Timeously {
     return;
   }
 
+  now() {
+    return new TimeBucket().tz(this.tz);
+  }
+
   start() {
     let self = this;
-    let {title, name, intervalType} = this;
+    let {title, name, intervalType, interval} = this;
     let eta = 60 - new Date().getSeconds();
 
     function callback() {
-      let now = new TimeBucket();
+      let now = self.now();
 
-      if (self.nextEvent[intervalType] === now[intervalType]) {
+      if (now[intervalType] % interval === 0) {
         self.callback();
-        self.readyNextEvent();
       }
     }
 
     this.initID = setTimeout(() => {
       // set a secondly interval
       this.timerID = setInterval(callback, 1000);
-      this.readyNextEvent();
-
-      console.log(`Timeously firing ${title}${name} from ${this.nextEvent.toString()}`);
 
       callback();
+
     }, eta * 1000);
 
     console.log(`Timeously starting ${title}${name} in T - ${eta}sec and counting`);
@@ -67,32 +68,8 @@ export default class Timeously {
     }
 
     if (this.timerID !== null) {
-      clearTimeout(this.timerID);
+      clearInterval(this.timerID);
       this.timerID = null;
-    }
-  }
-
-  readyNextEvent() {
-    let {interval, intervalType, modulus} = this;
-
-    this.lastEvent = new TimeBucket();
-    this.nextEvent = new TimeBucket();
-
-    let lastPeriod = this.lastEvent[intervalType];
-
-    if (modulus) {
-      for (let i = 0; i < interval; i++) {
-        let delta = i + 1;
-        let testPeriod = lastPeriod + delta;
-
-        if (testPeriod % modulus === 0) {
-          this.nextEvent[intervalType] = lastPeriod + delta;
-          break;
-        }
-      }
-    }
-    else {
-      this.nextEvent[intervalType] = lastPeriod + interval;
     }
   }
 }
