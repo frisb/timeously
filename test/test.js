@@ -8,7 +8,7 @@ describe('Timeously', function () {
 	it('should start a timeout', function (done) {
 		var options = {
 			name: 'my event',
-			type: Timeously.IntervalTypes.SECONDLY,
+			type: Timeously.IntervalTypes.MINUTELY,
 			interval: 5,
 			tz: 'Asia/Manila'
 		};
@@ -16,7 +16,7 @@ describe('Timeously', function () {
 		var i = 0;
 
 		var t = new Timeously(options, function () {
-			console.log(i + 1, t.now().toString());
+			console.log(`Executed event ${i + 1} at ${t.now.toString()}`);
 
 			if (i === 300) {
 				console.log('stopping after 1000 seconds.');

@@ -35,7 +35,7 @@ export default class Timeously {
     return;
   }
 
-  now() {
+  get now() {
     return new TimeBucket().tz(this.tz);
   }
 
@@ -73,9 +73,9 @@ export default class Timeously {
   }
 
   calculateNextTimeout() {
-    let {interval, intervalType} = this;
+    let {name, title, interval, intervalType, now} = this;
 
-    let nextEvent = this.now();
+    let nextEvent = now;
 
     // set lower interval types to 0
     for (let i = 6; i >= 0; i--) {
@@ -90,10 +90,10 @@ export default class Timeously {
       nextEvent[intervalType]++;
     }
 
-    console.log(`Next event is at ${nextEvent.toString()}`);
+    console.log(`[${title}]${name} - Next event is at ${nextEvent.toString()}`);
 
     // get the diff in milliseconds between nextEvent and now
-    return nextEvent.subtract(this.now());
+    return nextEvent.subtract(this.now);
   }
 
 }
