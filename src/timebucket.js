@@ -4,6 +4,8 @@ let moment = require('moment-timezone');
 
 let localOffsetMinutes = -new Date().getTimezoneOffset();
 
+let intervals = ['year','month','day','hour','minute','second','millisecond'];
+
 export default class TimeBucket {
 	constructor(date) {
 		if (!date) {
@@ -47,6 +49,17 @@ export default class TimeBucket {
 		this.tzOffsetMinutes = moment.tz(timezone).utcOffset();
 		this.minute += this.tzOffsetMinutes - localOffsetMinutes;
 		return this;
+	}
+
+	equals(timeBucket, intervalType) {
+		let eq = true;
+		for (let i = 0; i < 7; i++) {
+			let interval = intervals[i];
+			eq &= this[interval] === timeBucket[interval];
+			if (!eq || interval === intervalType)
+				break;
+		}
+		return eq;
 	}
 
 	toString(format) {
