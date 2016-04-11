@@ -98,7 +98,7 @@ export default class Timeously {
       nextEvent[intervalType]++;
     }
 
-    console.log(`[${title}]${name} - Next event is at ${nextEvent.toString()}. Time now is ${this.now}`);
+    console.log(`[${title}]${name} - Next event is at ${nextEvent.toString()}. Time now is ${this.now.toString()}`);
 
     // get the diff in milliseconds between nextEvent and now
     return nextEvent.subtract(this.now);
