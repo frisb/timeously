@@ -3,7 +3,7 @@ var assert = require('assert');
 var Timeously = require('../lib/timeously');
 
 describe('Timeously', function () {
-	this.timeout(120000);
+	this.timeout(3600000); // 1 hour
 
 	it('should start a timeout', function (done) {
 		var options = {
@@ -17,14 +17,12 @@ describe('Timeously', function () {
 
 		var t = new Timeously(options, function () {
 			console.log(i + 1, t.now().toString());
-			if (i === 2) {
-				console.log('stopping after 10 seconds.');
+
+			if (i === 300) {
+				console.log('stopping after 1000 seconds.');
 				t.stop();
 
 				done();
-			}
-			else {
-				console.log('this is my psuedo event ' + i);
 			}
 
 			i++

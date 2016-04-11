@@ -1,5 +1,8 @@
 import INTERVAL_TYPE from './intervaltype';
 import TimeBucket from './timebucket';
+import TimeSpan from './timespan';
+
+let intervals = ['year','month','day','hour','minute','second','millisecond'];
 
 export default class Timeously {
   constructor(options, callback) {
@@ -12,7 +15,6 @@ export default class Timeously {
     this.callback = callback;
 
     this.timerID = null;
-    this.initID = null;
     this.start();
   }
 
@@ -37,39 +39,61 @@ export default class Timeously {
     return new TimeBucket().tz(this.tz);
   }
 
+  execute() {
+    let self = this;
+
+    self.callback();
+
+    let nextTimeoutMillisec = self.calculateNextTimeout();
+
+    self.timerID = setTimeout(function() {
+      self.execute();
+    }, nextTimeoutMillisec);
+  }
+
   start() {
     let self = this;
-    let {title, name, intervalType, interval} = this;
-    let eta = 60 - new Date().getSeconds();
+    let {title, name} = self;
 
-    function callback() {
-      let now = self.now();
+    let nextTimeoutMillisec = self.calculateNextTimeout();
+    let timespan = new TimeSpan(nextTimeoutMillisec);
 
-      if (now[intervalType] % interval === 0) {
-        self.callback();
-      }
-    }
+    self.timerID = setTimeout(function() {
+      self.execute();
+    }, nextTimeoutMillisec);
 
-    this.initID = setTimeout(() => {
-      // set a secondly interval
-      this.timerID = setInterval(callback, 1000);
-
-      callback();
-
-    }, eta * 1000);
-
-    console.log(`Timeously starting ${title}${name} in T - ${eta}sec and counting`);
+    console.log(`Timeously starting ${title}${name} in T - ${timespan.toString()} and counting`);
   }
 
   stop() {
-    if (this.initID !== null) {
-      clearTimeout(this.initID);
-      this.initID = null;
-    }
-
     if (this.timerID !== null) {
-      clearInterval(this.timerID);
+      clearTimeout(this.timerID);
       this.timerID = null;
     }
   }
+
+  calculateNextTimeout() {
+    let {interval, intervalType} = this;
+
+    let nextEvent = this.now();
+
+    // set lower interval types to 0
+    for (let i = 6; i >= 0; i--) {
+      let interv = intervals[i];
+      if (interv === intervalType) break;
+      nextEvent[interv] -= nextEvent[interv];
+    }
+
+    // get the next interval type event
+    nextEvent[intervalType]++;
+    while (nextEvent[intervalType] % interval !== 0) {
+      nextEvent[intervalType]++;
+    }
+
+    console.log(`Next event is at ${nextEvent.toString()}`);
+
+    // get the diff in milliseconds between nextEvent and now
+    return nextEvent.subtract(this.now());
+  }
+
 }
