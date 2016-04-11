@@ -36,7 +36,7 @@ export default class TimeBucket {
 		}
 		else {
 			let diff = tzo >= 0 ? '+' : '-';
-			return `${diff}${pad(Math.abs(tzo / 60))}:${pad(Math.abs(tzo % 60))}`;
+			return `${diff}${pad(Math.floor(Math.abs(tzo / 60)))}:${pad(Math.abs(tzo % 60))}`;
 		}
 	}
 

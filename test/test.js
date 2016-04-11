@@ -10,7 +10,7 @@ describe('Timeously', function () {
 			name: 'my event',
 			type: Timeously.IntervalTypes.MINUTELY,
 			interval: 5,
-			tz: 'Asia/Manila'
+			tz: 'Asia/Kolkata'
 		};
 
 		var i = 0;
