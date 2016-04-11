@@ -35,6 +35,14 @@ export default class Timeously {
     return;
   }
 
+  get timeBucket() {
+    return TimeBucket;
+  }
+
+  get timeSpan() {
+    return TimeSpan;
+  }
+
   get now() {
     return new TimeBucket().tz(this.tz);
   }
