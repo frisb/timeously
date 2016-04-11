@@ -22,6 +22,14 @@ export default class Timeously {
     return INTERVAL_TYPE;
   }
 
+  static get TimeBucket() {
+    return TimeBucket;
+  }
+
+  static get TimeSpan() {
+    return TimeSpan;
+  }
+
   get title() {
     let {interval, intervalType} = this;
 
@@ -33,14 +41,6 @@ export default class Timeously {
     }
 
     return;
-  }
-
-  get timeBucket() {
-    return TimeBucket;
-  }
-
-  get timeSpan() {
-    return TimeSpan;
   }
 
   get now() {
