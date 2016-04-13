@@ -3,6 +3,7 @@ import pad from './pad';
 export default class TimeSpan {
 
   constructor(millisec) {
+
     this.millisec = millisec || 0;
 
     let sec = millisec / 1000;
@@ -13,9 +14,9 @@ export default class TimeSpan {
     // After days and hours , how many minutes are left
     this.mins = ~~((sec - (this.days * 86400) - (this.hours * 3600)) / 60);
     // Finally how many seconds left after removing days, hours and minutes.
-    this.sec = ~~((sec - (this.days * 86400) - (this.hours * 3600) - (this.mins * 60)));
+    this.sec = ~~((sec - (this.days * 86400) - (this.hours * 3600) - (this.mins * 60))) + 1;
     // Set total sec
-    this.totalSec = ~~sec;
+    this.totalSec = ~~sec + 1;
   }
 
   get totalDays() {

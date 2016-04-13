@@ -3,16 +3,25 @@ import TimeBucket from './timebucket';
 import TimeSpan from './timespan';
 
 let intervals = ['year','month','day','hour','minute','second','millisecond'];
+let intervalLimit = {
+  millisecond: 1000,
+  second: 60,
+  minute: 60,
+  hour: 24
+};
 
 export default class Timeously {
   constructor(options, callback) {
-    let {name, interval, type, tz} = options;
+    let {name, interval, type, tz, start, stop} = options;
 
     this.name = (name ? ` ${name}` : '');
     this.interval = interval || 1;
     this.intervalType = type || INTERVAL_TYPE.MINUTELY;
     this.tz = tz;
     this.callback = callback;
+    this.startTime = start;
+    this.stopTime = stop;
+    this.started = false;
 
     this.timerID = null;
     this.start();
@@ -50,6 +59,8 @@ export default class Timeously {
   execute() {
     let self = this;
 
+    if (!self.timerID) return;
+
     self.callback();
 
     let nextTimeoutMillisec = self.calculateNextTimeout();
@@ -74,6 +85,11 @@ export default class Timeously {
   }
 
   stop() {
+    let {title, name, now} = this;
+
+    console.log(`[${title}]${name}: Called stop at ${now.toString()}`);
+
+    this.started = false;
     if (this.timerID !== null) {
       clearTimeout(this.timerID);
       this.timerID = null;
@@ -81,7 +97,12 @@ export default class Timeously {
   }
 
   calculateNextTimeout() {
-    let {name, title, interval, intervalType, now} = this;
+    let {name, title, interval, intervalType, started, now, startTime, stopTime} = this;
+
+    let limit = intervalLimit[intervalType];
+    if (!limit) {
+      throw new Error(`Can not currently handle ${intervalType} intervals`);
+    }
 
     let nextEvent = now;
 
@@ -92,16 +113,45 @@ export default class Timeously {
       nextEvent[interv] -= nextEvent[interv];
     }
 
-    // get the next interval type event
     nextEvent[intervalType]++;
-    while (nextEvent[intervalType] % interval !== 0) {
-      nextEvent[intervalType]++;
+
+    let currTime = nextEvent[intervalType];
+
+    if (startTime) {
+      if (!started) {
+        this.started = true;
+        nextEvent[intervalType] += currTime > startTime ? limit - currTime + startTime : startTime - currTime;
+      }
+      else {
+        nextEvent[intervalType] += interval - 1;
+
+        if (stopTime) {
+          currTime = nextEvent[intervalType];
+          let darkTime = currTime > stopTime || currTime < startTime; // might need to have a deeper look at darkTime
+
+          if (darkTime) {
+            nextEvent[intervalType] += currTime > startTime ? limit - currTime + startTime : startTime - currTime;
+          }
+        }
+      }
+    }
+    else {
+      if (!started) {
+        this.started = true;
+        // get the next interval type event
+        while (interval > 1 && nextEvent[intervalType] % interval !== 0) {
+          nextEvent[intervalType]++;
+        }
+      }
+      else {
+        nextEvent[intervalType] += interval - 1;
+      }
     }
 
-    console.log(`[${title}]${name} - Next event is at ${nextEvent.toString()}. Time now is ${this.now.toString()}`);
+    console.log(`[${title}]${name} - Time now is ${this.now.toString()}. Next event is at ${nextEvent.toString()}.`);
 
     // get the diff in milliseconds between nextEvent and now
-    return nextEvent.subtract(this.now);
+    return nextEvent - this.now;
   }
 
 }
