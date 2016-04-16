@@ -127,9 +127,16 @@ export default class Timeously {
 
         if (stopTime) {
           currTime = nextEvent[intervalType];
-          let darkTime = currTime > stopTime || currTime < startTime; // might need to have a deeper look at darkTime
 
-          if (darkTime) {
+          let validTime = false;
+          if (startTime < stopTime) {
+            validTime = currTime >= startTime && currTime <= stopTime;
+          }
+          else {
+            validTime = currTime >= startTime || currTime <= stopTime;
+          }
+
+          if (!validTime) {
             nextEvent[intervalType] += currTime > startTime ? limit - currTime + startTime : startTime - currTime;
           }
         }
@@ -148,7 +155,7 @@ export default class Timeously {
       }
     }
 
-    console.log(`[${title}]${name} - Time now is ${this.now.toString()}. Next event is at ${nextEvent.toString()}.`);
+    console.log(`[${this.now.toString()}] (${title})${name} - Next event is at ${nextEvent.toString()}.`);
 
     // get the diff in milliseconds between nextEvent and now
     return nextEvent - this.now;
