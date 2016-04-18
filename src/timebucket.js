@@ -120,7 +120,6 @@ export default class TimeBucket {
 	set dayOfWeek(val) { this.date.setDay(val); }
 
 	get dayName() {
-		console.log(this.date, this.dayOfWeek, TimeBucket.DayNames[this.dayOfWeek]);
 		return TimeBucket.DayNames[this.dayOfWeek];
 	}
 
