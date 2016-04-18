@@ -26,8 +26,8 @@ describe('Timeously', function () {
 
 		var options = {
 			name: 'my event',
-			type: Timeously.IntervalTypes.DAILY,
-			interval: 5,
+			type: Timeously.IntervalTypes.HOURLY,
+			interval: 3,
 			//start: 15,
 			//stop: 45,
 			tz: 'Asia/Kolkata'

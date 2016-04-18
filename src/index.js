@@ -158,6 +158,7 @@ export default class Timeously {
       if (!started) {
         this.started = true;
         // get the next interval type event
+        console.log(name, title, nextEvent[intervalType], interval);
         while (interval > 1 && nextEvent[intervalType] % interval !== 0) {
           nextEvent[intervalType]++;
         }
