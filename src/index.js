@@ -7,8 +7,23 @@ let intervalLimit = {
   millisecond: 1000,
   second: 60,
   minute: 60,
-  hour: 24
+  hour: 24,
+  month: 11
 };
+
+function getLimit(intervalType, date) {
+  let limit = intervalLimit[intervalType];
+  if (!limit) {
+    if (intervalType === 'day') {
+      return date.daysInMonth;
+    }
+    else {
+      throw new Error(`Can not currently handle ${intervalType} intervals`);
+    }
+  }
+
+  return limit;
+}
 
 export default class Timeously {
   constructor(options, callback) {
@@ -99,10 +114,7 @@ export default class Timeously {
   calculateNextTimeout() {
     let {name, title, interval, intervalType, started, now, startTime, stopTime} = this;
 
-    let limit = intervalLimit[intervalType];
-    if (!limit) {
-      throw new Error(`Can not currently handle ${intervalType} intervals`);
-    }
+    let limit = getLimit(intervalType, now);
 
     let nextEvent = now;
 

@@ -22,66 +22,66 @@ describe('Timeously', function () {
 	//	done();
 	//});
   //
-	//it('should start a timeout', function (done) {
-  //
-	//	var options = {
-	//		name: 'my event',
-	//		type: Timeously.IntervalTypes.SECONDLY,
-	//		interval: 5,
-	//		//start: 15,
-	//		//stop: 45,
-	//		tz: 'Asia/Kolkata'
-	//	};
-  //
-	//	var i = 0;
-  //
-	//	var t = new Timeously(options, function () {
-	//		console.log(`Executed event ${i + 1} at ${t.now.toString()}`);
-  //
-	//		if (i === 12) {
-	//			console.log('Limit reached');
-	//			t.stop();
-	//			done();
-	//		}
-  //
-	//		i++
-	//	});
-  //
-	//});
+	it('should start a timeout', function (done) {
 
-	it('should test dark time', function (done) {
 		var options = {
-			name: 'dark time',
-			type: Timeously.IntervalTypes.SECONDLY,
+			name: 'my event',
+			type: Timeously.IntervalTypes.DAILY,
 			interval: 5,
-			start: 45,
-			stop: 5,
+			//start: 15,
+			//stop: 45,
 			tz: 'Asia/Kolkata'
 		};
 
-		let i = 0;
+		var i = 0;
 
 		var t = new Timeously(options, function () {
-			if (i === 2) {
+			console.log(`Executed event ${i + 1} at ${t.now.toString()}`);
+
+			if (i === 12) {
+				console.log('Limit reached');
+				t.stop();
 				done();
-				return;
 			}
 
-			let now = t.now;
-
-			if (options.start < options.stop) {
-				assert(now.second >= options.start && now.second <= options.stop);
-			}
-			else {
-				assert(now.second >= options.start || now.second <= options.stop);
-			}
-
-			if (now.second === options.start) {
-				i++;
-			}
-
+			i++
 		});
 
 	});
+
+	//it('should test dark time', function (done) {
+	//	var options = {
+	//		name: 'dark time',
+	//		type: Timeously.IntervalTypes.SECONDLY,
+	//		interval: 5,
+	//		start: 45,
+	//		stop: 5,
+	//		tz: 'Asia/Kolkata'
+	//	};
+  //
+	//	let i = 0;
+  //
+	//	var t = new Timeously(options, function () {
+	//		if (i === 2) {
+	//			done();
+	//			return;
+	//		}
+  //
+	//		let now = t.now;
+  //
+	//		if (options.start < options.stop) {
+	//			assert(now.second >= options.start && now.second <= options.stop);
+	//		}
+	//		else {
+	//			assert(now.second >= options.start || now.second <= options.stop);
+	//		}
+  //
+	//		if (now.second === options.start) {
+	//			i++;
+	//		}
+  //
+	//	});
+  //
+	//});
 
 });

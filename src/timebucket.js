@@ -133,4 +133,8 @@ export default class TimeBucket {
 
 	get tzOffsetMinutes() { return this._tzOffsetMinutes; }
 	set tzOffsetMinutes(val) { this._tzOffsetMinutes = val; }
+
+	get daysInMonth() {
+		return new Date(this.year, this.month + 1, 0).getDate();
+	}
 }
