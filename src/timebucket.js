@@ -25,7 +25,7 @@ export default class TimeBucket {
 	}
 
 	static get DayNames() {
-		return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+		return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 	}
 
 	get offsetString() {
@@ -119,7 +119,10 @@ export default class TimeBucket {
 	get dayOfWeek() { return this.date.getDay(); }
 	set dayOfWeek(val) { this.date.setDay(val); }
 
-	get dayName() { return TimeBucket.DayNames[this.dayOfWeek]; }
+	get dayName() {
+		console.log(this.date, this.dayOfWeek, TimeBucket.DayNames[this.dayOfWeek]);
+		return TimeBucket.DayNames[this.dayOfWeek];
+	}
 
 	get month() { return this.date.getMonth(); }
 	set month(val) { this.date.setMonth(val); }
