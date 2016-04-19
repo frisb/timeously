@@ -2,7 +2,7 @@ import INTERVAL_TYPE from './intervaltype';
 import TimeBucket from './timebucket';
 import TimeSpan from './timespan';
 
-let intervals = ['year','month','day','hour','minute','second','millisecond'];
+let intervals = ['year', 'month', 'day', 'hour', 'minute', 'second', 'millisecond'];
 let intervalLimit = {
   millisecond: 1000,
   second: 60,
@@ -12,17 +12,26 @@ let intervalLimit = {
 };
 
 function getLimit(intervalType, date) {
-  let limit = intervalLimit[intervalType];
-  if (!limit) {
-    if (intervalType === 'day') {
-      return date.daysInMonth;
-    }
-    else {
+  if (intervalType === 'day') {
+    return date.daysInMonth;
+  }
+  else {
+    let limit = intervalLimit[intervalType];
+    if (!limit) {
       throw new Error(`Can not currently handle ${intervalType} intervals`);
     }
+    return limit;
   }
+}
 
-  return limit;
+function validTime(currTime, startTime, stopTime) {
+  if (!startTime || !startTime)
+    return true;
+
+  if (startTime < stopTime)
+    return currTime >= startTime && currTime <= stopTime;
+
+  return currTime >= startTime || currTime <= stopTime;
 }
 
 export default class Timeously {
@@ -80,7 +89,7 @@ export default class Timeously {
 
     let nextTimeoutMillisec = self.calculateNextTimeout();
 
-    self.timerID = setTimeout(function() {
+    self.timerID = setTimeout(function () {
       self.execute();
     }, nextTimeoutMillisec);
   }
@@ -92,7 +101,7 @@ export default class Timeously {
     let nextTimeoutMillisec = self.calculateNextTimeout();
     let timespan = new TimeSpan(nextTimeoutMillisec);
 
-    self.timerID = setTimeout(function() {
+    self.timerID = setTimeout(function () {
       self.execute();
     }, nextTimeoutMillisec);
 
@@ -140,15 +149,7 @@ export default class Timeously {
         if (stopTime) {
           currTime = nextEvent[intervalType];
 
-          let validTime = false;
-          if (startTime < stopTime) {
-            validTime = currTime >= startTime && currTime <= stopTime;
-          }
-          else {
-            validTime = currTime >= startTime || currTime <= stopTime;
-          }
-
-          if (!validTime) {
+          if (!validTime(currTime, startTime, stopTime)) {
             nextEvent[intervalType] += currTime > startTime ? limit - currTime + startTime : startTime - currTime;
           }
         }
