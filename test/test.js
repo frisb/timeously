@@ -26,11 +26,11 @@ describe('Timeously', function () {
 
 		var options = {
 			name: 'my event',
-			type: Timeously.IntervalTypes.SECONDLY,
-			interval: 5,
-			start: 10,
-			stop: 45,
-			tz: 'Asia/Kolkata'
+			type: Timeously.IntervalTypes.MONTHLY,
+			interval: 1//,
+			//start: 10,
+			//stop: 45,
+			//tz: 'Asia/Kolkata'
 		};
 
 		var i = 0;

@@ -4,5 +4,6 @@ export default {
 	HOURLY: 'hour',
 	DAILY: 'day',
 	WEEKLY: 'dayOfWeek',
-	MONTHLY: 'month'
+	MONTHLY: 'month',
+	YEARLY: 'year'
 };

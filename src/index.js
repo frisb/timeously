@@ -8,7 +8,7 @@ let intervalLimit = {
   second: 60,
   minute: 60,
   hour: 24,
-  month: 11
+  month: 12
 };
 
 function getLimit(intervalType, date) {
@@ -25,7 +25,7 @@ function getLimit(intervalType, date) {
 }
 
 function validTime(currTime, startTime, stopTime) {
-  if (!startTime || !startTime)
+  if (!startTime || !stopTime)
     return true;
 
   if (startTime < stopTime)
@@ -72,8 +72,6 @@ export default class Timeously {
       if (val === intervalType)
         return `${interval} ${key.toLowerCase()}`;
     }
-
-    return;
   }
 
   get now() {
@@ -89,9 +87,10 @@ export default class Timeously {
 
     let nextTimeoutMillisec = self.calculateNextTimeout();
 
-    self.timerID = setTimeout(function () {
-      self.execute();
-    }, nextTimeoutMillisec);
+    //self.timerID = setTimeout(function () {
+    //  self.execute();
+    //}, nextTimeoutMillisec);
+    this.setLongTimeout(nextTimeoutMillisec);
   }
 
   start() {
@@ -101,9 +100,10 @@ export default class Timeously {
     let nextTimeoutMillisec = self.calculateNextTimeout();
     let timespan = new TimeSpan(nextTimeoutMillisec);
 
-    self.timerID = setTimeout(function () {
-      self.execute();
-    }, nextTimeoutMillisec);
+    //self.timerID = setTimeout(function () {
+    //  self.execute();
+    //}, nextTimeoutMillisec);
+    this.setLongTimeout(nextTimeoutMillisec);
 
     console.log(`Timeously starting ${title}${name} in T - ${timespan.toString()} and counting`);
   }
@@ -131,11 +131,24 @@ export default class Timeously {
     for (let i = 6; i >= 0; i--) {
       let interv = intervals[i];
       if (interv === intervalType) break;
-      nextEvent[interv] -= nextEvent[interv];
+
+      switch (interv) {
+        case 'day':
+          nextEvent[interv] = 1;
+          break;
+        case 'month':
+          nextEvent[interv] = 0;
+          break;
+        default:
+          nextEvent[interv] -= nextEvent[interv];
+          break;
+      }
+
     }
 
+    // next possible interval
     nextEvent[intervalType]++;
-
+    // current interval value
     let currTime = nextEvent[intervalType];
 
     if (startTime) {
@@ -168,10 +181,35 @@ export default class Timeously {
       }
     }
 
-    console.log(`[${this.now.toString()}] (${title})${name} - Next event is at ${nextEvent.toString()}.`);
-
     // get the diff in milliseconds between nextEvent and now
-    return nextEvent - this.now;
+    let millisecs = nextEvent - this.now;
+
+    console.log(`[${this.now.toString()}] (${title})${name} - Next event is at ${nextEvent.toString()}. ${millisecs}ms`);
+
+    return millisecs;
+  }
+
+  setLongTimeout(timeout_ms) {
+    let self = this;
+    let {title, name} = self;
+    let max = 86400000; // 1 day vs 2147483647 (max int)
+    //if we have to wait more than max time, need to recursively call this function again
+    if(timeout_ms > max) {
+      //now wait until the max wait time passes then call this function again with
+      //requested wait - max wait we just did, make sure and pass callback
+      self.timerID = setTimeout(function () {
+        let remaining = timeout_ms - max;
+        let days = Math.floor(remaining / 86400000);
+        console.log(`${title}${name}: Long timer - ${days} days remaining`);
+        self.setLongTimeout(remaining);
+      }, max);
+    }
+    //if we are asking to wait less than max, finally just do regular seTimeout and call callback
+    else {
+      setTimeout(function () {
+        self.execute();
+      }, timeout_ms);
+    }
   }
 
 }
