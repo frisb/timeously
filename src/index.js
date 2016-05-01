@@ -206,7 +206,7 @@ export default class Timeously {
     }
     //if we are asking to wait less than max, finally just do regular seTimeout and call callback
     else {
-      setTimeout(function () {
+      self.timerID = setTimeout(function () {
         self.execute();
       }, timeout_ms);
     }
