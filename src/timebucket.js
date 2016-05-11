@@ -69,7 +69,7 @@ export default class TimeBucket {
 				.replace('mm', pad(this.minute))
 				.replace('ss', pad(this.second))
 				.replace('SSS', pad(this.millisecond, 3))
-				.replace('ZZZ', this.offsetString);
+				.replace('Z', this.offsetString);
 		}
 		else {
 			return this.toISOString(true);
