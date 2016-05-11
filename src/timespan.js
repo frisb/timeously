@@ -15,8 +15,6 @@ export default class TimeSpan {
     this.mins = ~~((sec - (this.days * 86400) - (this.hours * 3600)) / 60);
     // Finally how many seconds left after removing days, hours and minutes.
     this.sec = ~~((sec - (this.days * 86400) - (this.hours * 3600) - (this.mins * 60))) + 1;
-    // Set total sec
-    this.totalSec = ~~sec + 1;
   }
 
   get totalDays() {
@@ -29,6 +27,10 @@ export default class TimeSpan {
 
   get totalMins() {
     return ~~(this.totalSec / 60);
+  }
+
+  get totalSec() {
+    return Math.ceil(this.millisec / 1000);
   }
 
   toString() {

@@ -60,15 +60,16 @@ export default class TimeBucket {
 
 	toString(format) {
 		if (format) {
-			return format.replace('yyyy', this.year.toString())
-										.replace('yy', this.year.toString().substr(2))
-										.replace('MM', pad(this.month+1))
-										.replace('dd', pad(this.day))
-										.replace('HH', pad(this.hour))
-										.replace('mm', pad(this.minute))
-										.replace('ss', pad(this.second))
-										.replace('SSS', pad(this.millisecond,3))
-										.replace('ZZZ', this.offsetString);
+			return format
+				.replace('yyyy', this.year.toString())
+				.replace('yy', this.year.toString().substr(2))
+				.replace('MM', pad(this.month + 1))
+				.replace('dd', pad(this.day))
+				.replace('HH', pad(this.hour))
+				.replace('mm', pad(this.minute))
+				.replace('ss', pad(this.second))
+				.replace('SSS', pad(this.millisecond, 3))
+				.replace('ZZZ', this.offsetString);
 		}
 		else {
 			return this.toISOString(true);
