@@ -24,22 +24,21 @@ export default class TimeSpan {
   }
 
   get totalHours() {
-    return ~~(this.totalsec / 3600);
+    return ~~(this.totalSec / 3600);
   }
 
   get totalMins() {
-    return ~~(this.totalsec / 60);
+    return ~~(this.totalSec / 60);
   }
 
   toString() {
-    let timer = '';
+    let clock = '';
 
     if (this.days > 0)
-      timer += `${pad(this.days)}:`;
+      clock += `${pad(this.days)}:`;
 
-    timer += `${pad(this.hours)}:`;
-    timer += `${pad(this.mins)}:${pad(this.sec)}`;
+    clock += `${pad(this.hours)}:${pad(this.mins)}:${pad(this.sec)}`;
 
-    return timer;
+    return clock;
   }
 }
