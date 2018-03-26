@@ -1,7 +1,8 @@
 'use strict';
 var assert = require('assert');
-var Timeously = require('../lib/timeously');
-var TimeBucket = Timeously.TimeBucket;
+var timeously = require('../lib/timeously');
+var TimeBucket = timeously.TimeBucket;
+var Timeously = timeously.Timeously;
 
 describe('Timeously', function () {
 	this.timeout(3600000); // 1 hour

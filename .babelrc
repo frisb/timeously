@@ -1,9 +1,0 @@
-{
-  "sourceMaps": true,
-  "compact": false,
-  "presets": ["es2015"],
-  "plugins": [
-    "transform-runtime",
-    "add-module-exports"
-  ]
-}

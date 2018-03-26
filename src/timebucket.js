@@ -1,10 +1,10 @@
-import pad from './pad';
+import { pad } from './pad';
 
 let moment = require('moment-timezone');
 
 let localOffsetMinutes = -new Date().getTimezoneOffset();
 
-export default class TimeBucket {
+export class TimeBucket {
 	constructor(date) {
 		if (!date) {
 			date = new Date();

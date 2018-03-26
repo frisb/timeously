@@ -1,4 +1,4 @@
-export default function pad(num, size) {
+export function pad(num, size) {
 	if (typeof(num) !== 'string')
 		num = '' + num;
 

@@ -1,5 +1,6 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+// const webpackConfig = require('./webpack.config.js');
 
 module.exports = function (grunt) {
   grunt.initConfig({
@@ -14,7 +15,7 @@ module.exports = function (grunt) {
 @license <%= pkg.license %>\n\
 \n\
 <%= license %>\n\
-*/\n\n',
+    */\n\n',
 
     clean: {
       default: {
@@ -22,11 +23,14 @@ module.exports = function (grunt) {
       }
     },
 
-    jshint: {
-      options: {
-        jshintrc: true
-      },
-      es6: ['src/**/*.js']
+    ts: {
+      compile : {
+        tsconfig: true,
+        options: {
+          fast: 'never',
+          outDir: 'lib'
+        }
+      }
     },
 
     webpack: {
@@ -35,7 +39,7 @@ module.exports = function (grunt) {
         entry  : './src/index.js',
 
         output : {
-          path     : './lib',
+          path     : path.resolve(__dirname, 'lib'),
           filename : '<%= pkg.name %>.js',
           library: 'Timeously',
           libraryTarget: 'umd',
@@ -49,40 +53,35 @@ module.exports = function (grunt) {
           'moment-timezone': 'moment-timezone'
         },
 
-        module : {
-          loaders: [
-            {
-              loader : 'json-loader',
-              test: /\.json$/
-            },
-            {
-              loader : 'babel-loader',
-              test: /\.js$/,
-              // Skip any files outside of your project's `src` directory
-              exclude: [
-                path.resolve(__dirname, 'node_modules')
-              ]
-            }
+        module: {
+          rules: [
+            // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
+            { test: /\.tsx?$/, loader: "ts-loader" }
           ]
         },
 
+        // ts: {
+        //   "compilerOptions": {
+        //     "target": "es5",
+        //     "sourceMap": true,
+        //     "jsx": "react",
+        //     "experimentalDecorators": true
+        //   },
+        //   "exclude": [
+        //     "node_modules",
+        //     "test"
+        //   ]
+        // },
+
         plugins: [
-          new webpack.BannerPlugin('<%= banner %>', { raw: true })
+          new webpack.BannerPlugin({ banner: '<%= banner %>', raw: true })
         ]
       }
     },
 
-    uglify: {
-      compile: {
-        options: {
-          banner: '/*! <%= headline %> */',
-          mangle: true,
-          report: 'gzip',
-          sourceMap: true,
-          sourceMapIn: 'lib/<%= pkg.name %>.js.map'
-        },
-        files: { 'lib/<%= pkg.name %>.min.js': 'lib/<%= pkg.name %>.js' }
-      }
+    resolve: {
+      // Add `.ts` and `.tsx` as a resolvable extension.
+      extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
     },
 
     mochaTest: {
@@ -96,10 +95,9 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('grunt-webpack');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-mocha-test');
 
-  grunt.registerTask('default', ['clean', 'jshint', 'webpack', 'uglify', 'mochaTest']);
+  grunt.registerTask('default', ['clean', 'ts', 'webpack', 'mochaTest']);
 };

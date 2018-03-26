@@ -1,6 +1,6 @@
-import pad from './pad';
+import { pad } from './pad';
 
-export default class TimeSpan {
+export class TimeSpan {
 
   constructor(millisec) {
 
