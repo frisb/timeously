@@ -6,15 +6,16 @@ export default class TimeSpan {
 
     this.millisec = millisec || 0;
 
-    let sec = millisec / 1000;
+    let totalsec = ~~(millisec / 1000);
+		// let remainder = millisec % 1000;
 
-    this.days = ~~(sec / 86400);
+    this.days = ~~(totalsec / 86400);
     // After deducting the days calculate the number of hours left
-    this.hours = ~~((sec - (this.days * 86400)) / 3600);
+    this.hours = ~~((totalsec - (this.days * 86400)) / 3600);
     // After days and hours , how many minutes are left
-    this.mins = ~~((sec - (this.days * 86400) - (this.hours * 3600)) / 60);
+    this.mins = ~~((totalsec - (this.days * 86400) - (this.hours * 3600)) / 60);
     // Finally how many seconds left after removing days, hours and minutes.
-    this.sec = ~~((sec - (this.days * 86400) - (this.hours * 3600) - (this.mins * 60))) + 1;
+    this.sec = ~~((totalsec - (this.days * 86400) - (this.hours * 3600) - (this.mins * 60)));// + 1; removing to test exports delta
   }
 
   get totalDays() {
