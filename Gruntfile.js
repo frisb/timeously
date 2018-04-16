@@ -47,7 +47,7 @@ module.exports = function (grunt) {
           umdNamedDefine: true
         },
 
-        devtool: 'source-map',
+        devtool: 'inline-source-map',
 
         externals: {
           'moment-timezone': 'moment-timezone'
@@ -56,22 +56,12 @@ module.exports = function (grunt) {
         module: {
           rules: [
             // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-            { test: /\.tsx?$/, loader: "ts-loader" }
+            {
+              test: /\.tsx?$/,
+              loader: 'ts-loader'
+            }
           ]
         },
-
-        // ts: {
-        //   "compilerOptions": {
-        //     "target": "es5",
-        //     "sourceMap": true,
-        //     "jsx": "react",
-        //     "experimentalDecorators": true
-        //   },
-        //   "exclude": [
-        //     "node_modules",
-        //     "test"
-        //   ]
-        // },
 
         plugins: [
           new webpack.BannerPlugin({ banner: '<%= banner %>', raw: true })
@@ -92,6 +82,7 @@ module.exports = function (grunt) {
         src: ['test/**/*.js']
       }
     }
+
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');

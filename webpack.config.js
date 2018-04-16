@@ -1,8 +1,10 @@
 const path = require('path');
 
-module.exports = {
+module.exports = (env, argv) => ({
+
   entry: '/src/index.js',
-  devtool: 'inline-source-map',
+  devtool: 'eval',
+
   module: {
     rules: [
       {
@@ -12,11 +14,14 @@ module.exports = {
       }
     ]
   },
+
   resolve: {
     extensions: [ '.tsx', '.ts', '.js' ]
   },
+
   output: {
     filename: 'timeously.js',
     path: path.resolve(__dirname, 'lib')
   }
-};
+
+});

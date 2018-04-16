@@ -12,9 +12,6 @@ export class TimeBucket {
 		else if (typeof(date) === 'string') {
 			date = new Date(date);
 		}
-		else {
-			date = date;
-		}
 
 		this.date = date;
 		this._tzOffsetMinutes = -date.getTimezoneOffset();
