@@ -36,6 +36,7 @@ module.exports = function (grunt) {
     webpack: {
       compile: {
         // webpack options
+				mode: "production",
         entry  : './src/index.js',
 
         output : {
