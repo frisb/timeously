@@ -23,15 +23,15 @@ module.exports = function (grunt) {
       }
     },
 
-    ts: {
-      compile : {
-        tsconfig: true,
-        options: {
-          fast: 'never',
-          outDir: 'lib'
-        }
-      }
-    },
+    // ts: {
+    //   compile : {
+    //     tsconfig: true,
+    //     options: {
+    //       fast: 'never',
+    //       outDir: 'lib'
+    //     }
+    //   }
+    // },
 
     webpack: {
       compile: {
@@ -53,12 +53,17 @@ module.exports = function (grunt) {
           'moment-timezone': 'moment-timezone'
         },
 
+				resolve: {
+					extensions: [ '.webpack.js', '.web.js', '.ts', '.tsx', '.js' ]
+				},
+
         module: {
           rules: [
             // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
             {
               test: /\.tsx?$/,
-              loader: 'ts-loader'
+              loader: 'ts-loader',
+							exclude: /node_modules/
             }
           ]
         },
@@ -67,11 +72,6 @@ module.exports = function (grunt) {
           new webpack.BannerPlugin({ banner: '<%= banner %>', raw: true })
         ]
       }
-    },
-
-    resolve: {
-      // Add `.ts` and `.tsx` as a resolvable extension.
-      extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
     },
 
     mochaTest: {
@@ -86,9 +86,9 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-ts');
+  // grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('grunt-webpack');
   grunt.loadNpmTasks('grunt-mocha-test');
 
-  grunt.registerTask('default', ['clean', 'ts', 'webpack', 'mochaTest']);
+  grunt.registerTask('default', ['clean', 'webpack', 'mochaTest']);
 };
