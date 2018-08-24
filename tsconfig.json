@@ -1,28 +1,23 @@
 {
-	"compilerOptions": {
-		"allowJs": true,
-		"declaration": true,
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"inlineSources": false,
-		"module": "commonjs",
-		"moduleResolution": "node",
-		"noImplicitAny": true,
-		"sourceMap": true,
-		"target": "es5",
-	  	"lib": [ "es2015", "dom" ],
-		"watch": false,
-		"noEmit": true,
-		"baseUrl": "./src",
-		"rootDir": "src",
-        "outDir": "lib"
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./lib",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "inlineSources": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "rootDir": "./src",
+    "outDir": "./lib",
+    "target": "es2015",
+    "watch": true,
+    "lib": [
+      "es2015"
+    ]
   },
-  "typeAcquisition": {
-    "enable": true
-  },
-  "include": [
-    "./src/**/*.{ts,js}",
-    "./typings/**/*.d.ts"
-  ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

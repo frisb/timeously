@@ -1,8 +1,6 @@
 'use strict';
-var assert = require('assert');
-var timeously = require('../lib/timeously');
-var TimeBucket = timeously.TimeBucket;
-var Timeously = timeously.Timeously;
+const assert = require('assert');
+const { TimeBucket, Timeously, INTERVAL_TYPE } = require('../lib');
 
 describe('Timeously', function () {
 	this.timeout(3600000); // 1 hour
@@ -27,7 +25,7 @@ describe('Timeously', function () {
 
 		var options = {
 			name: 'my event',
-			type: Timeously.IntervalTypes.MONTHLY,
+			type: INTERVAL_TYPE.SECONDLY,
 			interval: 1//,
 			//start: 10,
 			//stop: 45,

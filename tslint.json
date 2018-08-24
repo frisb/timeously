@@ -1,30 +1,19 @@
 {
   "extends": "tslint:recommended",
   "rules": {
-    "array-type": false,
     "comment-format": [false],
     "curly": false,
-    "forin": false,
-    "indent": [true],
-    "max-line-length": [256],
-    "no-angle-bracket-type-assertion": false,
+    "indent": true,
+    "max-line-length": 256,
     "no-bitwise": false,
-    "no-console": [false],
+    "no-console": false,
     "no-constructor-vars": false,
-    "no-empty": false,
-    "no-namespace": false,
     "no-reference": false,
     "no-trailing-whitespace": false,
     "object-literal-sort-keys": false,
     "one-line": [false],
-    "only-arrow-functions": false,
-    "ordered-imports": false,
-    "prefer-const": false,
-    "prefer-for-of": false,
     "quotemark": [true, "single", "avoid-escape"],
-    "space-before-function-paren": false,
-    "trailing-comma": [false],
-    "variable-name": [false]
+    "trailing-comma": false
   },
   "rulesDirectory": [
   ]

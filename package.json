@@ -1,28 +1,29 @@
 {
   "name": "timeously",
   "description": "Timeous interval creation for precise milestone events",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "contributors": [
     {
       "name": "Ashley Brener",
       "email": "ashley@frisb.com"
     }
   ],
-  "main": "lib/timeously",
+  "main": "lib/",
+  "types": "lib/index.d.ts",
   "engines": {
     "node": ">= 0.12.x"
   },
   "devDependencies": {
-    "@types/node": "^9.6.5",
-    "grunt": "^1.0.2",
+    "@types/node": "^10.5.5",
+    "grunt": "^1.0.3",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-mocha-test": "^0.13.3",
-    "grunt-ts": "^6.0.0-beta.19",
-    "grunt-webpack": "^3.1.1",
+    "grunt-ts": "^6.0.0-beta.21",
+    "grunt-webpack": "^3.1.2",
     "mocha": "^5.1.0",
-    "ts-loader": "^4.2.0",
-    "typescript": "^2.8.1",
-    "webpack": "^4.5.0"
+    "ts-loader": "^4.4.2",
+    "typescript": "^3.0.1",
+    "webpack": "^4.16.3"
   },
   "homepage": "http://timeous.ly",
   "repository": {
@@ -39,6 +40,7 @@
     "interval"
   ],
   "dependencies": {
+    "@types/moment-timezone": "^0.5.7",
     "moment-timezone": "^0.5.14"
   }
 }

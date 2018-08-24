@@ -23,57 +23,57 @@ module.exports = function (grunt) {
       }
     },
 
-    // ts: {
-    //   compile : {
-    //     tsconfig: true,
-    //     options: {
-    //       fast: 'never',
-    //       outDir: 'lib'
-    //     }
-    //   }
-    // },
-
-    webpack: {
-      compile: {
-        // webpack options
-				mode: "production",
-        entry  : './src/index.js',
-
-        output : {
-          path     : path.resolve(__dirname, 'lib'),
-          filename : '<%= pkg.name %>.js',
-          library: 'Timeously',
-          libraryTarget: 'umd',
-          sourceMapFilename: '[file].map',
-          umdNamedDefine: true
-        },
-
-        devtool: 'inline-source-map',
-
-        externals: {
-          'moment-timezone': 'moment-timezone'
-        },
-
-				resolve: {
-					extensions: [ '.webpack.js', '.web.js', '.ts', '.tsx', '.js' ]
-				},
-
-        module: {
-          rules: [
-            // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-            {
-              test: /\.tsx?$/,
-              loader: 'ts-loader',
-							exclude: /node_modules/
-            }
-          ]
-        },
-
-        plugins: [
-          new webpack.BannerPlugin({ banner: '<%= banner %>', raw: true })
-        ]
+    ts: {
+      compile : {
+        tsconfig: true,
+        options: {
+          fast: 'never',
+          outDir: 'lib'
+        }
       }
     },
+
+    // webpack: {
+    //   compile: {
+    //     // webpack options
+			// 	mode: "production",
+    //     entry  : './src/index.ts',
+		//
+    //     output : {
+    //       path     : path.resolve(__dirname, 'lib'),
+    //       filename : '<%= pkg.name %>.js',
+    //       library: 'Timeously',
+    //       libraryTarget: 'umd',
+    //       sourceMapFilename: '[file].map',
+    //       umdNamedDefine: true
+    //     },
+		//
+    //     devtool: 'inline-source-map',
+		//
+    //     externals: {
+    //       'moment-timezone': 'moment-timezone'
+    //     },
+		//
+			// 	resolve: {
+			// 		extensions: [ '.webpack.js', '.web.js', '.ts', '.tsx', '.js' ]
+			// 	},
+		//
+    //     module: {
+    //       rules: [
+    //         // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
+    //         {
+    //           test: /\.tsx?$/,
+    //           loader: 'ts-loader',
+			// 				exclude: /node_modules/
+    //         }
+    //       ]
+    //     },
+		//
+    //     plugins: [
+    //       new webpack.BannerPlugin({ banner: '<%= banner %>', raw: true })
+    //     ]
+    //   }
+    // },
 
     mochaTest: {
       run: {
@@ -87,9 +87,10 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
-  // grunt.loadNpmTasks('grunt-ts');
-  grunt.loadNpmTasks('grunt-webpack');
+  grunt.loadNpmTasks('grunt-ts');
+  // grunt.loadNpmTasks('grunt-webpack');
   grunt.loadNpmTasks('grunt-mocha-test');
 
-  grunt.registerTask('default', ['clean', 'webpack', 'mochaTest']);
+  // grunt.registerTask('default', ['clean', 'webpack', 'mochaTest']);
+	grunt.registerTask('default', ['clean', 'ts', 'mochaTest']);
 };
