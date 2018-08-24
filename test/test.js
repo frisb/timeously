@@ -1,6 +1,6 @@
 'use strict';
 const assert = require('assert');
-const { TimeBucket, Timeously, INTERVAL_TYPE } = require('../lib');
+const { TimeBucket, Timeously, INTERVAL_TYPE, TimeSpan } = require('../lib');
 
 describe('Timeously', function () {
 	this.timeout(3600000); // 1 hour
@@ -35,9 +35,11 @@ describe('Timeously', function () {
 		var i = 0;
 
 		var t = new Timeously(options, function () {
-			console.log(`Executed event ${i + 1} at ${t.now.toString()}`);
+			var timespan = new TimeSpan(t.now.date.getTime());
 
-			if (i === 12) {
+			console.log(`Executed event ${i + 1} at ${timespan.toString()}`);
+
+			if (i === 60) {
 				console.log('Limit reached');
 				t.stop();
 				done();

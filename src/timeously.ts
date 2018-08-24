@@ -193,7 +193,7 @@ export class Timeously {
 		}
 
 // get the diff in milliseconds between nextEvent and now
-		const millisec = nextEvent.valueOf() - this.now.valueOf();
+		const millisec = nextEvent.subtract(this.now);
 
 		console.log(`[${ this.now.toString() }] (${ title })${ name } - Next event is at ${ nextEvent.toString() }. ${ millisec }ms`);
 

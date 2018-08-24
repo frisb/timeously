@@ -1,5 +1,6 @@
 import * as moment from 'moment-timezone';
 import { pad } from './pad';
+import { INTERVAL_TYPE } from './intervaltype';
 
 const localOffsetMinutes = -new Date().getTimezoneOffset();
 
@@ -7,8 +8,7 @@ export class TimeBucket {
 	[intervalType: string]: any;
 
 	public tzOffsetMinutes: number;
-
-	private date: Date;
+	public date: Date;
 
 	constructor(date?: Date | string) {
 		if (!date) {

@@ -1,7 +1,7 @@
 export declare class TimeBucket {
     [intervalType: string]: any;
     tzOffsetMinutes: number;
-    private date;
+    date: Date;
     constructor(date?: Date | string);
     static readonly MonthNames: string[];
     static readonly DayNames: string[];
