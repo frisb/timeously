@@ -17,6 +17,7 @@ export declare class TimeBucket {
     minute: number;
     hour: number;
     day: number;
+    readonly dayOfWeek: number;
     readonly dayName: string;
     month: number;
     readonly monthName: string;

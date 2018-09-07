@@ -119,7 +119,7 @@ export class TimeBucket {
 	public get day() { return this.date.getDate(); }
 	public set day(val) { this.date.setDate(val); }
 
-	// public get dayOfWeek() { return this.date.getDay(); }
+	public get dayOfWeek() { return this.date.getDay(); }
 
 	public get dayName() {
 		return TimeBucket.DayNames[this.dayOfWeek];
